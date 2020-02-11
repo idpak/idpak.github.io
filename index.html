@@ -5,8 +5,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-        	<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css">
-        	<link rel="icon" href="images/favicon.png" type="image/png" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css">
+        <link rel="icon" href="images/favicon.png" type="image/png" sizes="16x16">
 	</head>
 	<body class="is-preload">
 
@@ -17,7 +17,7 @@
 					<h1><strong>Software Professional</strong> with Two years of experience in UX/UI development
                         with  working  knowledge on full stack development and  digital marketing.                       
                     </h1>
-                    <a href="/assets/Resume.pdf" target="_blank" class="button" style="color:#ffffff !important">Download Resume</a>
+                    <a href="/images/Resume.jpg" data-fancybox data-caption="Deepak Pattnaik Resume" data-width="1260" class="button" data-buttons='["download","close"]' style="color:#ffffff !important">Resume</a>                                        
 				</div>
 				<div class="inner">
 					<ul class="icons">
@@ -321,6 +321,30 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-            		<script src="assets/js/jquery.fancybox.js"></script>
+            <script src="assets/js/jquery.fancybox.js"></script>
+        <script>
+            $(document).bind("contextmenu",function(e){
+            return false;
+            });
+            
+            $('body').on('click', '[data-fancybox-download]', function(e) {
+               e.preventDefault();
+               fetch('http://127.0.0.1:50073/assets/Resume.pdf')
+                  .then(resp => resp.blob())
+                  .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    // the filename you want
+                    a.download = 'Deepak Pattnaik Resume.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);                    
+                  })
+                  .catch(() => alert('Opps! Download failed'));
+            });            
+          
+        </script>
 	</body>
 </html>
